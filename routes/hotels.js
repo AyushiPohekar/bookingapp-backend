@@ -1,21 +1,12 @@
 import express from 'express';
+import { createHotel } from '../controllers/HotelController.js';
 import Hotel from '../models/Hotel.js';
 const router=express.Router();
 
 
 //Create new Hotel
 
-router.post("/",async(req,res)=>{
-   
-    const newHotel=new Hotel(req.body)
-    try {
-        const savedHotel=await newHotel.save();
-        console.log(savedHotel)
-        res.status(200).json(savedHotel)
-    } catch (error) {
-        res.status(500).json(err)
-    }
-})
+router.post("/",createHotel);
 
 //update
 router.put("/:id",async(req,res)=>{
@@ -56,7 +47,7 @@ router.get("/:id",async(req,res)=>{
 })
 //get  hotels
 
-router.get("/",async(req,res)=>{
+router.get("/",async(req,res,next)=>{
    try {
         const Hotels=await Hotel.find();
     
