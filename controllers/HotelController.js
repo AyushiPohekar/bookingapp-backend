@@ -9,7 +9,7 @@ export const createHotel=async(req,res,next)=>{
         console.log(savedHotel)
         res.status(200).json(savedHotel)
     } catch (error) {
-       next(err);
+    next(error);
     }
 }
 export const updateHotel=async(req,res,next)=>{
@@ -24,8 +24,8 @@ export const updateHotel=async(req,res,next)=>{
 }
 export const deleteHotel=async(req,res,next)=>{
     try {
-        await Hotel.findOneAndDelete(req.params.id);
-          
+       const hotel= await Hotel.findOneAndDelete(req.params.id);
+          console.log(hotel)
            res.status(200).json("Hotel deleted")
        } catch (error) {
            res.status(500).json(err)
@@ -57,7 +57,9 @@ export const getHotels = async (req, res, next) => {
   };
 
 export const countByCity = async (req, res, next) => {
+  
     const cities = req.query.cities.split(",");
+    
     try {
       const list = await Promise.all(
         cities.map((city) => {
@@ -66,7 +68,7 @@ export const countByCity = async (req, res, next) => {
       );
       res.status(200).json(list);
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   };
   export const countByType = async (req, res, next) => {

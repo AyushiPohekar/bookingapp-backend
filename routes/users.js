@@ -2,7 +2,7 @@
 
 
 import express from 'express';
-import { createUser, deleteUser, getUserById, getUsers, updateUser } from '../controllers/UserController.js';
+import { createUser, deleteUser, getUserById, getUsers, updateUser } from '../controllers/userController.js';
 import { verifyAdmin, verifyToken, verifyUser } from '../utilis/verifyToken.js';
 
 const router=express.Router();
